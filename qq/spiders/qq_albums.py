@@ -16,7 +16,6 @@ engine = create_engine("mysql+pymysql://root:root@192.168.0.13:3306/albums_from_
 
 class TencentGetAlbumSpider(scrapy.Spider):
     name = "GetAlbum"
-    custom_settings = {"DOWNLOAD_DELAY": 3}
 
     album_url = "https://c.y.qq.com/v8/fcg-bin/album_library?g_tk=1497668653&loginUin=2403635410&hostUin=0&format=json&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&cmd=firstpage&page={}&pagesize=50&sort=1&language=-1&genre=0&year=1&pay=0&type=-1&company=-1"
     headers = {
@@ -26,7 +25,7 @@ class TencentGetAlbumSpider(scrapy.Spider):
 
     def start_requests(self):
         # for i in range(350, 20677):
-        for i in range(69, 20700):
+        for i in range(2191, 22000):
             url = self.album_url.format(str(i))
             yield scrapy.Request(url, callback=self.parse, headers=self.headers, meta=dict(page=i), dont_filter=True)
 
